@@ -89,7 +89,9 @@
 				.off('click.context.data-api', $menu.selector);
 			// Don't propagate click event so other currently
 			// opened menus won't close.
-			e.stopPropagation();
+			if (e != undefined) {
+				e.stopPropagation();
+			}
 		}
 
 		,keydown: function(e) {
@@ -160,9 +162,10 @@
 			// the calculated mouse position will be incorrect.
 			// Adjust the position of the menu by its offset parent position.
 			parentOffset = $menu.offsetParent().offset();
-			X.left = X.left - parentOffset.left;
-			Y.top = Y.top - parentOffset.top;
- 
+			if (parentOffset != undefined) {
+				X.left = X.left - parentOffset.left;
+				Y.top = Y.top - parentOffset.top;
+			}
 			return $.extend(tp, Y, X);
 		}
 
